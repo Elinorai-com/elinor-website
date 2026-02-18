@@ -526,19 +526,13 @@
         }
 
         const fd = new FormData(contactForm);
-        const payload = {
-          name: (fd.get("name") || "").trim(),
-          email: (fd.get("email") || "").trim(),
-          company: (fd.get("company") || "").trim(),
-          message: (fd.get("message") || "").trim(),
-        };
 
         try {
           await fetch(FORM_ENDPOINT, {
             method: "POST",
             mode: "no-cors",
-            redirect: "manual",
-            body: JSON.stringify(payload),
+            redirect: "follow",
+            body: fd,
           });
 
           formStatus.textContent = "Thanks! We\u2019ll be in touch soon.";
