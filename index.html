@@ -501,7 +501,7 @@
 
       /* ── Contact form submission ── */
       const FORM_ENDPOINT =
-        "https://script.google.com/macros/s/AKfycbwcVb02CJYVINiCgvo11zOiREWewAnn9ckxG7LYtsCYPtBwDhDgdxG1Zc4PLvFE-mRw/exec";
+        "https://script.google.com/macros/s/AKfycbyJAu5RkTTEr1Jwlc9wNf4P5gZHY8EaPlyAUlneUPVHoqaz6zfoV4x1QCpZh7vtzudp/exec";
       const contactForm = document.getElementById("contact-form");
       const formStatus = document.getElementById("form-status");
       const submitBtn = contactForm.querySelector('button[type="submit"]');
@@ -526,13 +526,17 @@
         }
 
         const fd = new FormData(contactForm);
+        const params = new URLSearchParams();
+        for (const [key, value] of fd.entries()) {
+          params.append(key, value);
+        }
 
         try {
-          await fetch(FORM_ENDPOINT, {
+          await fetch(FORM_ENDPOINT + "?" + params.toString(), {
             method: "POST",
             mode: "no-cors",
             redirect: "follow",
-            body: fd,
+            body: params,
           });
 
           formStatus.textContent = "Thanks! We\u2019ll be in touch soon.";
