@@ -536,6 +536,7 @@
         try {
           await fetch(FORM_ENDPOINT, {
             method: "POST",
+            mode: "no-cors",
             redirect: "manual",
             body: JSON.stringify(payload),
           });
