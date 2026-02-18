@@ -534,13 +534,12 @@
         };
 
         try {
-          const res = await fetch(FORM_ENDPOINT, {
+          await fetch(FORM_ENDPOINT, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            mode: "no-cors",
+            headers: { "Content-Type": "text/plain" },
             body: JSON.stringify(payload),
           });
-
-          if (!res.ok) throw new Error(res.status);
 
           formStatus.textContent = "Thanks! We\u2019ll be in touch soon.";
           formStatus.classList.add("form-status-success");
